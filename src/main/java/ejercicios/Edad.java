@@ -1,18 +1,34 @@
 
 package ejercicios;
 
-import static ejercicios.SetDeTenis.evaluar;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- *
- * @author danielsanchez
+ * Clase para calcular la edad del usuario basado en la fecha de nacimiento.
  */
 public class Edad {
+    
     public static String evaluar(int dia, int mes, int anno) {
-        // TODO: Coloca aquí el código del ejercicio 6: Edad
-        return "";
+        // Obtener la fecha actual
+        LocalDate today = LocalDate.now();
+        
+        // Crear la fecha de nacimiento
+        LocalDate birthDate = LocalDate.of(anno, mes, dia);
+        
+        // Calcular la edad
+        int edad = today.getYear() - birthDate.getYear();
+        
+        // Ajustar la edad si el cumpleaños no ha ocurrido aún este año
+        if (today.getMonthValue() < birthDate.getMonthValue() || 
+           (today.getMonthValue() == birthDate.getMonthValue() && today.getDayOfMonth() < birthDate.getDayOfMonth())) {
+            edad--;
+        }
+        
+        // Crear una respuesta
+        return "Usted tiene " + edad + " años.";
     }
+    
     
     public static void main(String[] args) {
         Scanner lector = new Scanner(System.in);
